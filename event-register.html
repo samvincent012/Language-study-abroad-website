@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Registration - Language Study Abroad</title>
+<link rel="stylesheet" href="\Users\PC 7\Desktop\SAM\pro\style.css">
+</head>
+<body>
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="event-register.html">Event Registration</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Register for an Event</h2>
+    <form id="eventForm">
+        <label>Full Name:</label><br>
+        <input type="text" name="name" required><br><br>
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+        <label>Select Event:</label><br>
+        <select name="event">
+            <option>Webinar on IELTS Preparation</option>
+            <option>Spanish Culture Workshop</option>
+            <option>French Conversation Meetup</option>
+        </select><br><br>
+        <button type="submit">Register</button>
+    </form>
+    <p id="eventMsg" class="success" style="display:none;"></p>
+</section>
+
+<script>
+document.getElementById('eventForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('eventMsg').textContent = "You have successfully registered for the event!";
+    document.getElementById('eventMsg').style.display = "block";
+    this.reset();
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+</body>
+</html>

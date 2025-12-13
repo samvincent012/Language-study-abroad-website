@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login - Language Study Abroad</title>
+<link rel="stylesheet" href="\Users\PC 7\Desktop\SAM\pro\style.css">
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Student Login</h2>
+    <form id="loginForm">
+        <label>Username:</label><br>
+        <input type="text" name="username" id="username" placeholder="Enter your name" required><br><br>
+        <label>Password:</label><br>
+        <input type="password" name="password" id="password" placeholder="Enter your password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+    <p id="loginMsg" class="success" style="display:none;"></p>
+</section>
+
+<script>
+document.getElementById('loginForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    // Simulate login check (front-end only)
+    if(username && password){
+        // Store username in sessionStorage to use in dashboard
+        sessionStorage.setItem('studentName', username);
+        document.getElementById('loginMsg').textContent = "Login successful! Redirecting to your dashboard...";
+        document.getElementById('loginMsg').style.display = "block";
+
+        setTimeout(() => {
+            window.location.href = "dashboard.html";
+        }, 1500);
+    } else {
+        document.getElementById('loginMsg').textContent = "Invalid credentials!";
+        document.getElementById('loginMsg').style.display = "block";
+    }
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

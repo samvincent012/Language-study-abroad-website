@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Language Quiz</h2>
+    <form id="quizForm">
+        <p>1. What is the Spanish word for "Hello"?</p>
+        <input type="radio" name="q1" value="Hola"> Hola<br>
+        <input type="radio" name="q1" value="Bonjour"> Bonjour<br>
+        <input type="radio" name="q1" value="Ciao"> Ciao<br>
+
+        <p>2. What is the French word for "Thank you"?</p>
+        <input type="radio" name="q2" value="Gracias"> Gracias<br>
+        <input type="radio" name="q2" value="Merci"> Merci<br>
+        <input type="radio" name="q2" value="Danke"> Danke<br><br>
+
+        <button type="submit">Submit Quiz</button>
+    </form>
+    <p id="quizMsg" class="success" style="display:none;"></p>
+</section>
+
+<script>
+document.getElementById('quizForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    document.getElementById('quizMsg').textContent = "Your quiz has been submitted successfully!";
+    document.getElementById('quizMsg').style.display = "block";
+    this.reset();
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+</body>
+</html>

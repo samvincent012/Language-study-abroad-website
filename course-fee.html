@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Fee & Payment - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="course-fee.html">Course Fee & Payment</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Course Fees</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Course</th>
+                <th>Duration</th>
+                <th>Fee (USD)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>English Beginner</td>
+                <td>3 Months</td>
+                <td>$150</td>
+            </tr>
+            <tr>
+                <td>Spanish Intermediate</td>
+                <td>3 Months</td>
+                <td>$200</td>
+            </tr>
+            <tr>
+                <td>French Advanced</td>
+                <td>3 Months</td>
+                <td>$250</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section>
+    <h2>Payment</h2>
+    <form action="#">
+        <label>Full Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" name="email" required><br><br>
+
+        <label>Select Course:</label><br>
+        <select name="course">
+            <option>English Beginner</option>
+            <option>Spanish Intermediate</option>
+            <option>French Advanced</option>
+        </select><br><br>
+
+        <label>Payment Method:</label><br>
+        <select name="payment-method">
+            <option>Credit Card</option>
+            <option>Debit Card</option>
+            <option>PayPal</option>
+        </select><br><br>
+
+        <label>Card Number:</label><br>
+        <input type="text" name="card-number" placeholder="1234 5678 9012 3456" required><br><br>
+
+        <label>Expiry Date:</label><br>
+        <input type="text" name="expiry" placeholder="MM/YY" required><br><br>
+
+        <label>CVV:</label><br>
+        <input type="text" name="cvv" placeholder="123" required><br><br>
+
+        <button type="submit">Pay Now</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+</body>
+</html>
