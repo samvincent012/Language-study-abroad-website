@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subscribe - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== GENERAL STYLES ===== */
+body {
+    background: #0b0f1a;
+    color: #e5e7eb;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    padding: 18px 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #facc15;
+    font-size: 28px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu li a:hover {
+    color: #facc15;
+}
+
+/* ===== SUBSCRIPTION FORM ===== */
+section {
+    max-width: 500px;
+    margin: 80px auto;
+    padding: 40px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    text-align: center;
+}
+
+section h2 {
+    color: #facc15;
+    margin-bottom: 25px;
+    font-size: 28px;
+}
+
+section p {
+    color: #cbd5f5;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+input[type="email"] {
+    width: 80%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+
+button {
+    padding: 14px 30px;
+    border-radius: 35px;
+    border: none;
+    font-weight: 700;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(0,198,255,0.4);
+}
+
+/* ===== POPUP ===== */
+.popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-box {
+    background: #020617;
+    padding: 30px 40px;
+    border-radius: 18px;
+    text-align: center;
+    color: #facc15;
+    font-size: 18px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+    background: #020617;
+    border-top: 1px solid #1e293b;
+    margin-top: 80px;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="newsletter.html">Subscribe</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Subscribe to Our Newsletter</h2>
+    <p>Get the latest updates, events, and achievements directly in your inbox.</p>
+    <form id="newsletterForm">
+        <input type="email" name="email" placeholder="Enter your email" required><br>
+        <button type="submit">Subscribe</button>
+    </form>
+</section>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+    <div class="popup-box">
+        ✅ Thank you for subscribing! Please wait...
+    </div>
+</div>
+
+<script>
+document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // Show popup
+    const popup = document.getElementById('popup');
+    popup.style.display = "flex";
+
+    // Redirect after 2 seconds
+    setTimeout(() => {
+        window.location.href = "newsletter-feed.html?welcome=1"; // pass a flag for welcome message
+    }, 2000);
+
+    this.reset();
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

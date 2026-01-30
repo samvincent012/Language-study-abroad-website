@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter Feed - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+<style>
+/* ===== NEWSLETTER FEED STYLE ===== */
+.newsletter-feed {
+    max-width: 1000px;
+    margin: 30px auto 50px auto;
+    padding: 0 20px;
+}
+
+.welcome-msg {
+    background: #1e40af;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 600;
+    margin-bottom: 25px;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+/* NEWS CARD */
+.news-card {
+    background: #020617;
+    padding: 25px;
+    border-radius: 16px;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+    transition: transform 0.3s, opacity 0.8s ease, transform 0.8s ease;
+    opacity: 0;
+    transform: translateY(30px);
+    display: flex;
+    gap: 20px;
+}
+
+.news-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.news-thumbnail {
+    width: 150px;
+    height: 100px;
+    border-radius: 12px;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.news-content {
+    flex: 1;
+}
+
+.news-card h3 {
+    color: #facc15;
+    margin-bottom: 10px;
+    font-size: 22px;
+}
+
+.news-card .preview {
+    color: #cbd5f5;
+    margin-bottom: 10px;
+}
+
+.full-text-wrapper {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease, padding 0.5s ease;
+    color: #e5e7eb;
+}
+
+.full-text-wrapper.open {
+    max-height: 1000px;
+    padding-top: 10px;
+}
+
+.full-text-wrapper p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.btn {
+    margin-top: 15px;
+    margin-right: 10px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.read-more {
+    background: #1e40af;
+    color: white;
+}
+
+.read-more:hover {
+    background: #2563eb;
+}
+
+.badge {
+    background: #facc15;
+    color: #020617;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+header, footer {
+    text-align: center;
+    padding: 20px;
+    background: #020617;
+    color: #facc15;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+}
+
+.nav-menu li a:hover {
+    color: #facc15;
+}
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="newsletter.html">Newsletter</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="newsletter-feed">
+    <!-- Welcome Message -->
+    <div class="welcome-msg" id="welcomeMsg">
+        🎉 Welcome to our Newsletter Feed! Check out the latest updates.
+    </div>
+
+    <h2>Latest Updates & Announcements</h2>
+
+    <!-- NEWS ITEM 1 -->
+    <div class="news-card">
+        <img src="images/ielts.jpg" alt="IELTS Seminar" class="news-thumbnail">
+        <div class="news-content">
+            <h3>🏆 IELTS Success Seminar 2025 <span class="badge">Top News</span></h3>
+            <p class="preview">Over 350 students attended our IELTS Success Seminar in New Delhi.</p>
+            <div class="full-text-wrapper">
+                <p>The seminar covered advanced IELTS strategies, scoring tips, and interactive Q&A sessions with certified instructors.</p>
+                <p>Students participated in mock tests and received personalized feedback to improve their speaking, writing, reading, and listening skills.</p>
+                <p>Certificates were awarded to students with exceptional performance, motivating others to excel in their exams.</p>
+                <p>The event strengthened the study-abroad preparation of students and boosted their confidence for international exams.</p>
+            </div>
+            <button class="btn read-more" onclick="toggleReadMore(this)">Read More</button>
+        </div>
+    </div>
+
+    <!-- NEWS ITEM 2 -->
+    <div class="news-card">
+        <img src="images/spanish.jpg" alt="Spanish Workshop" class="news-thumbnail">
+        <div class="news-content">
+            <h3>🎉 Spanish Culture Workshop <span class="badge">Event</span></h3>
+            <p class="preview">Fun workshop exploring Spanish culture, cuisine, and language basics.</p>
+            <div class="full-text-wrapper">
+                <p>Participants learned traditional Spanish dishes and practiced Spanish language exercises daily.</p>
+                <p>Cultural games and activities helped students understand Spanish customs and traditions interactively.</p>
+                <p>A virtual mini-exhibition showcased students' work on Spanish culture projects, enhancing learning engagement.</p>
+                <p>Feedback from participants highlighted the value of combining culture with language learning for deeper immersion.</p>
+            </div>
+            <button class="btn read-more" onclick="toggleReadMore(this)">Read More</button>
+        </div>
+    </div>
+
+    <!-- NEWS ITEM 3 -->
+    <div class="news-card">
+        <img src="images/french.jpg" alt="French Film Night" class="news-thumbnail">
+        <div class="news-content">
+            <h3>🎬 French Film Night <span class="badge">Event</span></h3>
+            <p class="preview">Students explored French cinema and culture through screenings.</p>
+            <div class="full-text-wrapper">
+                <p>The screening included iconic French films to expose students to cinematic storytelling and culture.</p>
+                <p>Group discussions after each film helped analyze plot, character development, and cultural context.</p>
+                <p>Students practiced French vocabulary related to cinema, enhancing both language and cultural comprehension.</p>
+                <p>The event concluded with an interactive Q&A session with a French film critic, providing insights into the industry.</p>
+            </div>
+            <button class="btn read-more" onclick="toggleReadMore(this)">Read More</button>
+        </div>
+    </div>
+
+</section>
+
+<script>
+function toggleReadMore(button) {
+    const card = button.closest('.news-card');
+    const fullText = card.querySelector('.full-text-wrapper');
+    fullText.classList.toggle('open');
+    button.textContent = fullText.classList.contains('open') ? 'Read Less' : 'Read More';
+}
+
+// Fade-in scroll animation
+const cards = document.querySelectorAll('.news-card');
+window.addEventListener('scroll', () => {
+    const triggerBottom = window.innerHeight / 1.2;
+    cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) {
+            card.classList.add('visible');
+        }
+    });
+});
+
+// Show welcome message if navigated from subscription
+window.addEventListener('load', () => {
+    const welcome = document.getElementById('welcomeMsg');
+    welcome.style.opacity = '1';
+    setTimeout(() => {
+        welcome.style.opacity = '0';
+    }, 4000); // fades out after 4 seconds
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

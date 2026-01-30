@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Dashboard - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+    .dashboard {
+        max-width: 900px;
+        margin: 30px auto;
+    }
+
+    .material-card {
+        border: 1px solid #ccc;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        background: #f9f9f9;
+    }
+
+    .material-card a {
+        display: inline-block;
+        margin-top: 8px;
+        color: #0066cc;
+        text-decoration: none;
+    }
+
+    .material-card a:hover {
+        text-decoration: underline;
+    }
+
+    .logout-btn {
+        margin-top: 20px;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="dashboard">
+    <h2>Welcome, <span id="studentName"></span> 👋</h2>
+    <p>Access your study materials below. Click to watch videos or download PDFs.</p>
+
+    <!-- Study Material 1 -->
+    <div class="material-card">
+        <h3>📘 English Grammar Basics (PDF)</h3>
+        <p>Learn tenses, sentence structure, and grammar rules.</p>
+        <a href="https://www.scribd.com/document/862997402/ENGLISH-GRAMMAR-NOTES" target="_blank">Download PDF</a>
+    </div>
+
+    <!-- Study Material 2 -->
+    <div class="material-card">
+        <h3>🎧 Listening Practice (YouTube)</h3>
+        <p>Improve listening skills with real English conversations.</p>
+        <a href="https://youtu.be/vYbajflJxJE?si=ZsqSjykVOUH8jpJR" target="_blank">
+            Watch Listening Practice Video
+        </a>
+    </div>
+
+    <!-- Study Material 3 -->
+    <div class="material-card">
+        <h3>📝 IELTS Practice Questions (PDF)</h3>
+        <p>Practice reading, writing, listening, and speaking questions.</p>
+        <a href="pdfs/ielts-practice-questions.pdf" target="_blank">
+            Download Practice PDF
+        </a>
+    </div>
+
+    <!-- Study Material 4 -->
+    <div class="material-card">
+        <h3>📺 Vocabulary Video Lessons (YouTube)</h3>
+        <p>Daily vocabulary lessons with pronunciation and examples.</p>
+        <a href="https://www.youtube.com/watch?v=4r7wHMg5Yjg" target="_blank">
+            Watch Vocabulary Lesson
+        </a>
+    </div>
+
+    <!-- Study Material 5 -->
+    <div class="material-card">
+        <h3>🎤 Speaking Practice Tips (YouTube)</h3>
+        <p>Learn how to speak English fluently and confidently.</p>
+        <a href="https://www.youtube.com/watch?v=7w9Vj8h7X4E" target="_blank">
+            Watch Speaking Tips
+        </a>
+    </div>
+
+    <button class="logout-btn" onclick="logout()">Logout</button>
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+<script>
+    const studentName = sessionStorage.getItem('studentName');
+
+    if(studentName){
+        document.getElementById('studentName').textContent = studentName;
+    } else {
+        window.location.href = "login.html";
+    }
+
+    function logout(){
+        sessionStorage.clear();
+        window.location.href = "login.html";
+    }
+</script>
+
+</body>
+</html>

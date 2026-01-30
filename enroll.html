@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enroll - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+/* ===== Loader ===== */
+.loader {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0,0,0,0.2);
+    border-top: 4px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+    display: none;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== Success Popper Effect ===== */
+.success-wrapper {
+    display: none;
+    margin-top: 25px;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.success-wrapper .pop {
+    display: inline-block;
+    font-size: 22px;
+    opacity: 0;
+}
+
+.success-text {
+    display: inline-block;
+    margin: 0 10px;
+    opacity: 0;
+}
+
+/* Animation triggers */
+.success-wrapper.show .left {
+    animation: slideFromLeft 0.6s ease forwards;
+}
+
+.success-wrapper.show .right {
+    animation: slideFromRight 0.6s ease forwards;
+}
+
+.success-wrapper.show .success-text {
+    animation: popCenter 0.6s ease forwards;
+    animation-delay: 0.3s;
+}
+
+/* Keyframes */
+@keyframes slideFromLeft {
+    from { transform: translateX(-50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideFromRight {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes popCenter {
+    0% { transform: scale(0.8); opacity: 0; }
+    70% { transform: scale(1.05); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="enroll.html" class="active">Enroll</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Enroll in a Course</h2>
+
+    <form id="enrollForm">
+        <label>Name:</label><br>
+        <input type="text" required><br><br>
+
+        <label>Email:</label><br>
+        <input type="email" required><br><br>
+
+        <label>Course:</label><br>
+        <select required>
+            <option>English Beginner</option>
+            <option>Spanish Intermediate</option>
+            <option>French Advanced</option>
+        </select><br><br>
+
+        <button type="submit" id="enrollBtn">Enroll Now</button>
+    </form>
+
+    <!-- Loader -->
+    <div class="loader" id="loader"></div>
+
+    <!-- Success Message -->
+    <div id="successWrapper" class="success-wrapper">
+        <span class="pop left">🎉</span>
+        <span class="success-text">Your enrollment has been completed successfully!</span>
+        <span class="pop right">🎉</span>
+    </div>
+</section>
+
+<script>
+document.getElementById('enrollForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const loader = document.getElementById('loader');
+    const btn = document.getElementById('enrollBtn');
+    const success = document.getElementById('successWrapper');
+
+    // Reset UI
+    success.style.display = "none";
+    success.classList.remove("show");
+    loader.style.display = "block";
+    btn.disabled = true;
+    btn.textContent = "Processing...";
+
+    // Simulate server delay
+    setTimeout(() => {
+        loader.style.display = "none";
+        btn.disabled = false;
+        btn.textContent = "Enroll Now";
+        document.getElementById('enrollForm').reset();
+
+        // Show success with popper animation
+        success.style.display = "block";
+        void success.offsetWidth; // restart animation
+        success.classList.add("show");
+    }, 2000);
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

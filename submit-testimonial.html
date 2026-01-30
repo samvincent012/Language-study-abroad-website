@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Submit Testimonial - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    /* your existing CSS here */
+
+    textarea {
+        width: 100%;
+        max-width: 800px;
+        height: 200px;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        resize: vertical;
+    }
+
+
+/* ===== Testimonial Cards ===== */
+.testimonial-card {
+    background: #1f2937;
+    color: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    max-width: 800px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.6);
+}
+
+.testimonial-card img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00c6ff;
+}
+
+.testimonial-card h4 {
+    color: #00c6ff;
+    margin-bottom: 8px;
+}
+
+.testimonial-card p {
+    margin: 0;
+}
+
+.testimonial-section {
+    max-width: 900px;
+    margin: 0 auto 40px auto;
+}
+
+.testimonial-section h2 {
+    color: #00c6ff;
+    margin-bottom: 20px;
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="submit-testimonial.html">Submit Testimonial</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="testimonial-section">
+    <h2>What Our Students Say</h2>
+
+    <!-- Previous Testimonials -->
+    <div class="testimonial-card">
+        <img src="https://i.pinimg.com/564x/61/e0/df/61e0dfcdcfb1556ff72fb1e4b1d4583f.jpg" alt="John Smith">
+        <div>
+            <h4>John Smith</h4>
+            <p>"The English Beginner course helped me achieve my desired IELTS score in just 3 months. The teachers are professional and supportive!"</p>
+        </div>
+    </div>
+
+    <div class="testimonial-card">
+        <img src="images/maria.jpg" alt="Maria Lopez">
+        <div>
+            <h4>Maria Lopez</h4>
+            <p>"The Spanish Culture Workshop was amazing! I learned so much about the language and culture in a fun way."</p>
+        </div>
+    </div>
+
+    <div class="testimonial-card">
+        <img src="images/david.jpg" alt="David Miller">
+        <div>
+            <h4>David Miller</h4>
+            <p>"I highly recommend Language Study Abroad for anyone preparing for exams or wanting to improve their language skills. Very personalized teaching."</p>
+        </div>
+    </div>
+</section>
+
+<section class="testimonial-section">
+    <h2>Submit Your Testimonial</h2>
+    <form id="testimonialForm">
+        <label>Name:</label><br>
+        <input type="text" name="name" required><br><br>
+
+        <label>Upload Profile Image:</label><br>
+        <input type="file" name="photo" accept="image/*"><br><br>
+
+        <label>Testimonial:</label><br>
+        <textarea name="testimonial" rows="10" required></textarea><br><br>
+
+        <button type="submit" class="btn">Submit</button>
+    </form>
+    <p id="testimonialMsg" class="success" style="display:none; margin-top: 15px;"></p>
+</section>
+
+<script>
+const form = document.getElementById('testimonialForm');
+const testimonialSection = document.querySelector('.testimonial-section');
+
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    const name = form.name.value;
+    const testimonialText = form.testimonial.value;
+    const photoInput = form.photo.files[0];
+
+    let photoURL = 'images/default-profile.png'; // default image
+    if(photoInput){
+        const reader = new FileReader();
+        reader.onload = function(e){
+            photoURL = e.target.result;
+
+            addTestimonialCard(name, testimonialText, photoURL);
+        }
+        reader.readAsDataURL(photoInput);
+    } else {
+        addTestimonialCard(name, testimonialText, photoURL);
+    }
+
+    // Show success message
+    const msg = document.getElementById('testimonialMsg');
+    msg.textContent = "Thank you! Your testimonial has been submitted successfully.";
+    msg.style.display = "block";
+
+    form.reset();
+});
+
+function addTestimonialCard(name, text, photo){
+    const newCard = document.createElement('div');
+    newCard.classList.add('testimonial-card');
+    newCard.innerHTML = `
+        <img src="${photo}" alt="${name}">
+        <div>
+            <h4>${name}</h4>
+            <p>"${text}"</p>
+        </div>
+    `;
+    testimonialSection.insertBefore(newCard, testimonialSection.children[1]); // insert below heading
+}
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+</body>
+</html>

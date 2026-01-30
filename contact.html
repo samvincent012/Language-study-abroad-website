@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Map - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+<style>
+    section {
+        max-width: 900px;
+        margin: 30px auto;
+        padding: 15px;
+    }
+
+    iframe {
+        width: 100%;
+        height: 450px;
+        border: 0;
+        border-radius: 8px;
+    }
+
+    .contact-details {
+        margin-top: 20px;
+        padding: 15px;
+        background-color: #f3f4f6; /* keep light background */
+        border-radius: 8px;
+    }
+
+    .contact-details h3 {
+        color: #1d4ed8; /* same as original theme */
+        margin-bottom: 10px;
+    }
+
+    .contact-details p {
+        margin: 5px 0;
+    }
+
+    /* Button for directions */
+    .btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #1d4ed8; /* theme color */
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .btn:hover {
+        background-color: #2563eb; /* slightly brighter on hover */
+        transform: translateY(-2px);
+    }
+
+    .contact-details a {
+        color: #1d4ed8;
+        text-decoration: none;
+    }
+
+    .contact-details a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="map.html" class="active">Contact Map</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Contact Us</h2>
+    <p>Find our office location:</p>
+    
+    <!-- Google Maps Pin -->
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.123456!2d-122.419415!3d37.774929!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858064dfd3c2d3%3A0x1b2c3d4e5f6!2s123%20Language%20Street,+Study%20City,+Country!5e0!3m2!1sen!2sus!4v1700000000000" 
+        allowfullscreen="" 
+        loading="lazy"
+        title="Language Study Abroad Office Location">
+    </iframe>
+
+    <div class="contact-details">
+        <h3>Our Office Details</h3>
+        <p><strong>Address:</strong> 123 Language Street, Study City, Country</p>
+        <p><strong>Phone:</strong> <a href="tel:+1234567890">+1 234 567 890</a></p>
+        <p><strong>Email:</strong> <a href="mailto:info@languagestudyabroad.com">info@languagestudyabroad.com</a></p>
+        <p><strong>Working Hours:</strong> Mon-Fri 9:00 AM - 6:00 PM</p>
+        
+        <!-- Directions Button -->
+        <a href="https://www.google.com/maps/dir/?api=1&destination=123+Language+Street,+Study+City,+Country" target="_blank" class="btn">
+            Get Directions
+        </a>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

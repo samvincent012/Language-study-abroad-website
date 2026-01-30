@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="faq-section">
+    <h2>Frequently Asked Questions</h2>
+
+    <!-- ASK QUESTION -->
+    <div class="ask-question">
+        <h3>Ask Your Question</h3>
+
+        <form id="faqForm">
+            <label>Your Question:</label><br>
+            <textarea id="questionInput" rows="5" required></textarea><br><br>
+
+            <button type="submit">Get Answer</button>
+        </form>
+
+       <div id="autoAnswer" class="chat-bubble bot"></div>
+
+    </div>
+</section>
+
+<script>
+document.getElementById("faqForm").addEventListener("submit", function(e){
+    e.preventDefault();
+
+    const question = document.getElementById("questionInput").value.toLowerCase();
+    const answerBox = document.getElementById("autoAnswer");
+
+    let answer = "Thank you for your question. Our team will contact you shortly.";
+
+    if (question.includes("experience") || question.includes("beginner")) {
+        answer = "No prior experience is required. We offer beginner to advanced level courses.";
+    } 
+    else if (question.includes("live")) {
+        answer = "Yes, all classes are live. Recorded sessions are also available.";
+    } 
+    else if (question.includes("certificate")) {
+        answer = "Yes, you will receive an internationally recognized certificate.";
+    } 
+    else if (question.includes("scholarship")) {
+        answer = "Yes, scholarships are available for eligible students.";
+    } 
+    else if (question.includes("duration")) {
+        answer = "Course duration ranges from 3 to 12 months depending on the level.";
+    } 
+    else if (question.includes("fees") || question.includes("cost")) {
+        answer = "Course fees vary based on language and level. Please contact us for details.";
+    } 
+    else if (question.includes("abroad")) {
+        answer = "Yes, we provide complete guidance for studying abroad including visa support.";
+    }
+
+    // Reset animation
+    answerBox.style.display = "block";
+    answerBox.innerHTML = "";
+    
+    let i = 0;
+    function typeEffect() {
+        if (i < answer.length) {
+            answerBox.innerHTML += answer.charAt(i);
+            i++;
+            setTimeout(typeEffect, 20);
+        }
+    }
+    typeEffect();
+});
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+

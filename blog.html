@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+
+    .blog-post {
+        margin-bottom: 30px;
+        padding: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .more-text {
+        display: none;
+    }
+
+    button {
+        margin-top: 10px;
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Blog</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Our Blog</h2>
+
+    <!-- Blog 1 -->
+    <div class="blog-post">
+        <h3>Top 10 Tips for Learning a Language Fast</h3>
+        <p><strong>Published:</strong> Jan 5, 2025</p>
+
+        <p>
+            Learning a new language quickly requires consistency, motivation,
+            and smart learning methods.
+        </p>
+
+        <p class="more-text" id="blog1">
+            Practicing every day, even for a short time, helps build strong
+            language habits. Speaking with native speakers improves confidence
+            and pronunciation. Watching movies, listening to music, and reading
+            books in the target language make learning enjoyable and natural.
+            Using language apps, keeping a vocabulary notebook, and reviewing
+            new words regularly can speed up progress. Making mistakes is a
+            normal part of learning, so learners should not be afraid to speak.
+        </p>
+
+        <button onclick="toggleText('blog1', this)">Read More</button>
+    </div>
+
+    <!-- Blog 2 -->
+    <div class="blog-post">
+        <h3>Preparing for IELTS Abroad</h3>
+        <p><strong>Published:</strong> Feb 12, 2025</p>
+
+        <p>
+            Studying abroad creates the perfect environment for IELTS preparation.
+        </p>
+
+        <p class="more-text" id="blog2">
+            Living in an English-speaking country allows students to practice
+            English every day in real-life situations. This improves listening
+            and speaking skills naturally. Language schools abroad offer expert
+            guidance and structured IELTS courses. Regular mock tests help
+            students understand the exam format and manage time effectively.
+            Interacting with teachers, classmates, and locals builds confidence
+            and increases the chances of achieving a high IELTS score.
+        </p>
+
+        <button onclick="toggleText('blog2', this)">Read More</button>
+    </div>
+
+</section>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+
+<script>
+function toggleText(id, btn) {
+    var text = document.getElementById(id);
+
+    if (text.style.display === "none" || text.style.display === "") {
+        text.style.display = "block";
+        btn.innerText = "Read Less";
+    } else {
+        text.style.display = "none";
+        btn.innerText = "Read More";
+    }
+}
+</script>
+
+</body>
+</html>

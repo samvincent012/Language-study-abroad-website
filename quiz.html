@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>International Language Test</title>
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body { margin: 0; font-family: Poppins, sans-serif; background: #000; color: #facc15; }
+.navbar { background: #111; padding: 12px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #facc15; }
+.navbar h1 { margin: 0; font-size: 20px; color: #facc15; }
+.navbar button { padding: 6px 12px; border-radius: 8px; border: 2px solid #facc15; background: #000; color: #facc15; font-weight: 700; cursor: pointer; }
+.container { max-width: 1000px; margin: 40px auto; padding: 40px; background: #0b0b0b; border: 2px solid #facc15; border-radius: 18px; }
+select, button { padding: 12px 18px; border-radius: 10px; border: 2px solid #facc15; background: #000; color: #facc15; font-weight: 700; }
+button { background: #facc15; color: #000; cursor: pointer; }
+button:disabled { opacity: .6; cursor: not-allowed; }
+.timer { float: right; font-weight: 700; }
+.progress-wrap { height: 10px; background: #27272a; border-radius: 10px; overflow: hidden; margin: 20px 0; }
+.progress { height: 100%; width: 0%; background: #facc15; transition: .3s; }
+.question { margin-top: 25px; }
+.option { display: block; padding: 14px; margin-top: 10px; border: 2px solid #27272a; border-radius: 10px; cursor: pointer; color: #e5e7eb; }
+.option.selected { background: #facc15; color: #000; font-weight: 700; }
+.option input { display: none; }
+#quizSection, #resultBox, #certificateBox { display: none; }
+#resultBox, #certificateBox { text-align: center; margin-top: 30px; }
+iframe { width: 100%; height: 600px; border: 2px solid #facc15; margin-top: 20px; border-radius: 10px; }
+.nav-buttons { margin-top: 20px; display: flex; justify-content: space-between; }
+.review-panel { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px; }
+.review-panel button { padding: 6px 10px; font-size: 14px; border-radius: 6px; border: 2px solid #facc15; background: #000; color: #facc15; cursor: pointer; }
+.review-panel button.answered { background: #facc15; color: #000; }
+body {
+    background: #0b0f1a;
+    color: #e5e7eb;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: linear-gradient(135deg, #0f172a, #020617);
+    padding: 18px 55px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    color: #facc15;
+    font-size: 28px;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-menu li a:hover {
+    color: #facc15;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="quiz.html">quiz</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <!-- START -->
+    <div id="startSection">
+        <h2>International Language Proficiency Test</h2>
+        <select id="levelSelect">
+            <option value="beginner">Beginner (10Q)</option>
+            <option value="intermediate">Intermediate (15Q)</option>
+            <option value="advanced">Advanced (20Q)</option>
+        </select><br><br>
+        <button onclick="startQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- QUIZ -->
+    <div id="quizSection">
+        <h2>Quiz <span class="timer" id="timer"></span></h2>
+        <div class="progress-wrap"><div class="progress" id="progressBar"></div></div>
+        <div id="questionContainer"></div>
+        <div class="nav-buttons">
+            <button id="prevBtn" onclick="prevQuestion()">Previous</button>
+            <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        </div>
+        <div class="review-panel" id="reviewPanel"></div>
+    </div>
+
+    <!-- RESULT -->
+    <div id="resultBox">
+        <h2 id="scoreText"></h2>
+        <h3 id="levelText"></h3>
+        <button onclick="viewCertificate()">View Certificate</button>
+    </div>
+
+    <!-- CERTIFICATE DISPLAY -->
+    <div id="certificateBox">
+        <h2>Your Certificate</h2>
+        <iframe id="certFrame"></iframe>
+    </div>
+</div>
+
+<script>
+const beginner = [
+    { q: "Spanish word for Hello?", o: ["Hola", "Bonjour", "Ciao"], a: "Hola" },
+    { q: "French Thank you?", o: ["Merci", "Gracias", "Danke"], a: "Merci" },
+    { q: "Language of Spain?", o: ["Spanish", "German", "French"], a: "Spanish" },
+    { q: "Capital of France?", o: ["Paris", "Rome", "Madrid"], a: "Paris" },
+    { q: "Danke means?", o: ["Thank you", "Hello", "Bye"], a: "Thank you" },
+    { q: "Ciao language?", o: ["Italian", "Spanish", "French"], a: "Italian" },
+    { q: "Brazil language?", o: ["Portuguese", "Spanish", "French"], a: "Portuguese" },
+    { q: "Rome country?", o: ["Italy", "France", "Spain"], a: "Italy" },
+    { q: "Madrid country?", o: ["Spain", "France", "Italy"], a: "Spain" },
+    { q: "Hola language?", o: ["Spanish", "French", "German"], a: "Spanish" }
+];
+
+const intermediate = beginner.concat([
+    { q: "Bonjour means?", o: ["Hello", "Thanks", "Bye"], a: "Hello" },
+    { q: "Danke language?", o: ["German", "French", "Spanish"], a: "German" },
+    { q: "Lisbon country?", o: ["Portugal", "Spain", "Italy"], a: "Portugal" },
+    { q: "Vienna country?", o: ["Austria", "Germany", "France"], a: "Austria" },
+    { q: "Salut language?", o: ["French", "German", "Italian"], a: "French" }
+]);
+
+const advanced = intermediate.concat([
+    { q: "Italian language family?", o: ["Romance", "Slavic", "Germanic"], a: "Romance" },
+    { q: "German language family?", o: ["Germanic", "Romance", "Slavic"], a: "Germanic" },
+    { q: "Portuguese spoken in?", o: ["Brazil", "Spain", "France"], a: "Brazil" },
+    { q: "Bonjour country?", o: ["France", "Italy", "Spain"], a: "France" },
+    { q: "Madrid capital of?", o: ["Spain", "Italy", "France"], a: "Spain" }
+]);
+
+const BANK = { beginner, intermediate, advanced };
+const CONFIG = { beginner: { time: 600, count: 10 }, intermediate: { time: 720, count: 15 }, advanced: { time: 900, count: 20 } };
+
+let questions = [], level = "", timeLeft, interval, score = 0;
+let currentQ = 0; 
+let userAnswers = [];
+
+const shuffle = a => a.sort(() => Math.random() - 0.5);
+
+function startQuiz() {
+    level = document.getElementById("levelSelect").value;
+    document.getElementById("levelSelect").disabled = true;
+    questions = shuffle([...BANK[level]]).slice(0, CONFIG[level].count);
+    userAnswers = new Array(questions.length).fill(null);
+    timeLeft = CONFIG[level].time;
+    currentQ = 0;
+    document.getElementById("startSection").style.display = "none";
+    document.getElementById("quizSection").style.display = "block";
+    document.getElementById("resultBox").style.display = "none";
+    document.getElementById("certificateBox").style.display = "none";
+    renderQuestion();
+    renderReviewPanel();
+    startTimer();
+}
+
+function renderQuestion() {
+    const q = questions[currentQ];
+    const container = document.getElementById("questionContainer");
+    container.innerHTML = `
+        <div class="question">
+            <p>${currentQ + 1}. ${q.q}</p>
+            ${q.o.map(o => `
+                <label class="option ${userAnswers[currentQ]===o?'selected':''}">
+                    <input type="radio" name="q${currentQ}" value="${o}" ${userAnswers[currentQ]===o?'checked':''}> ${o}
+                </label>
+            `).join("")}
+        </div>
+    `;
+    document.getElementById("prevBtn").disabled = currentQ === 0;
+    document.getElementById("nextBtn").textContent = currentQ === questions.length -1 ? "Submit" : "Next";
+    updateProgress();
+    renderReviewPanel();
+}
+
+// record selection
+document.addEventListener("click", e=>{
+    if(e.target.classList.contains("option")){
+        const input = e.target.querySelector("input");
+        userAnswers[currentQ] = input.value;
+        document.querySelectorAll(`input[name="${input.name}"]`).forEach(i=>i.parentElement.classList.remove("selected"));
+        e.target.classList.add("selected");
+        updateProgress();
+        renderReviewPanel();
+    }
+});
+
+function updateProgress(){
+    const answered = userAnswers.filter(a=>a!=null).length;
+    document.getElementById("progressBar").style.width = (answered/questions.length*100)+"%";
+}
+
+function nextQuestion(){
+    if(currentQ === questions.length -1){
+        // Check unanswered
+        const unanswered = userAnswers.map((a,i)=>a===null? i+1 : null).filter(Boolean);
+        if(unanswered.length > 0){
+            alert(`You have not answered all questions! Please review: ${unanswered.join(", ")}`);
+            return;
+        }
+        submitQuiz();
+    } else {
+        currentQ++;
+        renderQuestion();
+    }
+}
+
+function prevQuestion(){
+    if(currentQ > 0){
+        currentQ--;
+        renderQuestion();
+    }
+}
+
+// ===== REVIEW PANEL =====
+function renderReviewPanel(){
+    const panel = document.getElementById("reviewPanel");
+    panel.innerHTML = "";
+    questions.forEach((q,i)=>{
+        const btn = document.createElement("button");
+        btn.textContent = i+1;
+        if(userAnswers[i]) btn.classList.add("answered");
+        btn.onclick = ()=>{ currentQ = i; renderQuestion(); };
+        panel.appendChild(btn);
+    });
+}
+
+function startTimer(){
+    interval = setInterval(()=>{
+        let m = Math.floor(timeLeft/60);
+        let s = timeLeft % 60;
+        document.getElementById("timer").textContent = `⏱ ${m}:${s.toString().padStart(2,"0")}`;
+        if(timeLeft--<=0) submitQuiz();
+    },1000);
+}
+
+function submitQuiz(){
+    clearInterval(interval);
+    score = 0;
+    questions.forEach((q,i)=>{
+        if(userAnswers[i]===q.a) score++;
+    });
+    document.getElementById("quizSection").style.display="none";
+    document.getElementById("resultBox").style.display="block";
+    document.getElementById("scoreText").textContent = `Score: ${score}/${questions.length}`;
+    document.getElementById("levelText").textContent = `Level: ${level.toUpperCase()}`;
+}
+
+const { jsPDF } = window.jspdf;
+
+function viewCertificate(){
+    const name = prompt("Enter your name:");
+    if(!name) return;
+
+    const pdf = new jsPDF("landscape","pt","a4");
+    pdf.setFillColor(0,0,0);
+    pdf.rect(0,0,842,595,'F');
+    pdf.setDrawColor(250,204,21);
+    pdf.setLineWidth(6);
+    pdf.rect(20,20,802,555);
+    pdf.setFont("helvetica","bold");
+    pdf.setFontSize(32);
+    pdf.setTextColor(250,204,21);
+    pdf.text("International Certificate of Proficiency",421,120,{align:"center"});
+    pdf.setFontSize(28);
+    pdf.setTextColor(255,215,0);
+    pdf.text(name,421,200,{align:"center"});
+    pdf.setFontSize(20);
+    pdf.text(`Level: ${level.toUpperCase()} | Score: ${score}/${questions.length}`,421,240,{align:"center"});
+    pdf.setFontSize(16);
+    pdf.setTextColor(255,255,255);
+    pdf.text("This certifies that the above named candidate has successfully completed",421,370,{align:"center"});
+    pdf.text("the International Language Proficiency Assessment.",421,390,{align:"center"});
+    pdf.setFontSize(14);
+    pdf.text("Authorized International Language Examination Board",421,500,{align:"center"});
+    pdf.text(`Issued on: ${new Date().toDateString()}`,421,520,{align:"center"});
+    document.getElementById("certificateBox").style.display="block";
+    document.getElementById("certFrame").src = pdf.output("dataurlstring");
+}
+
+function goHome(){
+    clearInterval(interval);
+    document.getElementById("startSection").style.display="block";
+    document.getElementById("quizSection").style.display="none";
+    document.getElementById("resultBox").style.display="none";
+    document.getElementById("certificateBox").style.display="none";
+    document.getElementById("levelSelect").disabled=false;
+}
+</script>
+</body>
+</html>

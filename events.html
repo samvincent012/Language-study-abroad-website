@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Events - Language Study Abroad</title>
+<link rel="stylesheet" href="style.css">
+
+<!-- jsPDF CDN for PDF download -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+<header>
+    <h1>Language Study Abroad</h1>
+    <nav>
+        <ul class="nav-menu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="events.html">Events</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section>
+    <h2>Register for Events</h2>
+
+    <!-- Event Registration Form -->
+    <form id="eventForm" class="event-form">
+        <label>Full Name:</label>
+        <input type="text" name="name" required>
+
+        <label>Father's Name:</label>
+        <input type="text" name="father_name" required>
+
+        <label>Email:</label>
+        <input type="email" name="email" required>
+
+        <label>Phone Number:</label>
+        <input type="tel" name="phone" placeholder="+91 9876543210" required>
+
+        <label>Address:</label>
+        <textarea name="address" rows="4" required></textarea>
+
+        <h3>Select Events:</h3>
+        <label><input type="checkbox" name="events" value="Webinar on IELTS Preparation - Jan 15, 2025"> Webinar on IELTS Preparation - Jan 15, 2025</label>
+        <label><input type="checkbox" name="events" value="Spanish Culture Workshop - Feb 10, 2025"> Spanish Culture Workshop - Feb 10, 2025</label>
+        <label><input type="checkbox" name="events" value="French Conversation Meetup - Mar 5, 2025"> French Conversation Meetup - Mar 5, 2025</label>
+        <label><input type="checkbox" name="events" value="Advanced English Grammar Workshop - Mar 20, 2025"> Advanced English Grammar Workshop - Mar 20, 2025</label>
+        <label><input type="checkbox" name="events" value="Spanish Cooking Class - Apr 10, 2025"> Spanish Cooking Class - Apr 10, 2025</label>
+        <label><input type="checkbox" name="events" value="French Film Discussion Night - Apr 25, 2025"> French Film Discussion Night - Apr 25, 2025</label>
+        <label><input type="checkbox" name="events" value="IELTS Mock Test Session - May 5, 2025"> IELTS Mock Test Session - May 5, 2025</label>
+
+        <button type="submit" class="btn">Register</button>
+    </form>
+</section>
+
+<!-- Popup Message -->
+<div class="event-popup-overlay" id="eventPopup">
+    <div class="event-popup-box" id="eventPopupBox">
+        <h1>🎉 Registration Successful! 🎉</h1>
+        <p>Your registration has been submitted successfully. See your PDF receipt below!</p>
+        <button id="downloadBtn" style="display:none;" onclick="downloadEventReceipt()">⬇ Download PDF Receipt</button>
+        <button onclick="closeEventPopup()">OK</button>
+    </div>
+</div>
+
+<script>
+const form = document.getElementById('eventForm');
+const popupOverlay = document.getElementById('eventPopup');
+const popupBox = document.getElementById('eventPopupBox');
+const downloadBtn = document.getElementById('downloadBtn');
+
+form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Get student details
+    const studentName = form.name.value;
+    const fatherName = form.father_name.value;
+    const email = form.email.value;
+    const phone = form.phone.value;
+    const address = form.address.value;
+
+    // Get selected events
+    const selectedEvents = Array.from(document.querySelectorAll('input[name="events"]:checked'))
+                                .map(input => input.value);
+
+    if(selectedEvents.length === 0){
+        alert("Please select at least one event to register.");
+        return;
+    }
+
+    // Store info for PDF
+    popupBox.studentInfo = {studentName, fatherName, email, phone, address, selectedEvents};
+
+    // Show popup
+    popupOverlay.style.display = 'flex';
+    popupBox.style.display = 'block';
+    downloadBtn.style.display = 'inline-block';
+
+    // Reset form
+    form.reset();
+});
+
+function closeEventPopup() {
+    popupOverlay.style.display = 'none';
+    popupBox.style.display = 'none';
+    downloadBtn.style.display = 'none';
+}
+
+// PDF Receipt
+function downloadEventReceipt() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const info = popupBox.studentInfo;
+    const date = new Date().toLocaleString();
+    const receiptNo = "EV-" + Math.floor(100000 + Math.random() * 900000);
+
+    doc.setFontSize(18);
+    doc.text("Language Study Abroad", 20, 20);
+    doc.setFontSize(12);
+    doc.text("Event Registration Receipt", 20, 30);
+    doc.line(20, 34, 190, 34);
+
+    doc.text(`Receipt No: ${receiptNo}`, 20, 45);
+    doc.text(`Date: ${date}`, 20, 55);
+    doc.text(`Name: ${info.studentName}`, 20, 65);
+    doc.text(`Father's Name: ${info.fatherName}`, 20, 75);
+    doc.text(`Email: ${info.email}`, 20, 85);
+    doc.text(`Phone: ${info.phone}`, 20, 95);
+    doc.text(`Address: ${info.address}`, 20, 105);
+
+    doc.text("Registered Event(s):", 20, 120);
+    doc.text(info.selectedEvents.join("\n"), 20, 130);
+    doc.line(20, 170, 190, 170);
+    doc.text("Thank you for registering. We will contact you with details.", 20, 180);
+
+    doc.save(`Event_Receipt_${receiptNo}.pdf`);
+}
+</script>
+
+<footer>
+    <p>&copy; 2025 Language Study Abroad. All rights reserved.</p>
+</footer>
+</body>
+</html>
